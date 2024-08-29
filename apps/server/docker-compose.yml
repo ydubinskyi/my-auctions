@@ -1,0 +1,15 @@
+services:
+  postgresdb:
+    image: postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=username
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=my_lots
+    ports:
+      - '5432:5432'
+    volumes:
+      - db:/var/lib/postgres
+
+volumes:
+  db:

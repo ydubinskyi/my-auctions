@@ -1,12 +1,11 @@
-import type { Config } from "drizzle-kit";
+import process from 'node:process'
+import type { Config } from 'drizzle-kit'
 
-const drizzleConfig = {
-  dialect: "sqlite",
-  schema: "./src/schema/*",
-  out: "./drizzle",
+export default {
+  schema: './src/schema/*',
+  out: './drizzle',
+  dialect: 'postgresql',
   dbCredentials: {
-    url: "./db.sqlite",
+    url: process.env.DB_URL,
   },
-} as const satisfies Config;
-
-export default drizzleConfig;
+} satisfies Config
