@@ -5,6 +5,9 @@
   "references": [
     {
       "path": "./apps/storefront"
+    },
+    {
+      "path": "./apps/server"
     }
   ]
 }
