@@ -28,18 +28,27 @@
           "build"
         ],
         "options": {
-          "buildTarget": "server:build",
+          "buildTarget": "@my-auctions/server:build",
           "runBuildTargetDependencies": false
         },
         "configurations": {
           "development": {
-            "buildTarget": "server:build:development"
+            "buildTarget": "@my-auctions/server:build:development"
           },
           "production": {
-            "buildTarget": "server:build:production"
+            "buildTarget": "@my-auctions/server:build:production"
           }
         }
+      },
+      "docker-build": {
+        "dependsOn": [
+          "build"
+        ],
+        "command": "docker build -f apps/server/Dockerfile . -t my-auctions-server"
       }
     }
+  },
+  "dependencies": {
+    "@my-auctions/server/core": "workspace:*"
   }
 }

@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common';
 
+import { CoreModule } from '@my-auctions/server/core';
+
 @Module({
-  imports: [],
+  imports: [CoreModule],
   controllers: [],
   providers: [],
 })
