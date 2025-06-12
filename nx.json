@@ -28,7 +28,11 @@
           "watchDepsName": "watch-deps"
         }
       },
-      "exclude": ["libs/server/core/*", "libs/server/database/*"]
+      "exclude": [
+        "libs/server/core/*",
+        "libs/server/database/*",
+        "libs/server/entities/*"
+      ]
     },
     {
       "plugin": "@nx/next/plugin",
@@ -65,7 +69,11 @@
     },
     {
       "plugin": "@nx/js/typescript",
-      "include": ["libs/server/core/*", "libs/server/database/*"],
+      "include": [
+        "libs/server/core/*",
+        "libs/server/database/*",
+        "libs/server/entities/*"
+      ],
       "options": {
         "typecheck": {
           "targetName": "typecheck"

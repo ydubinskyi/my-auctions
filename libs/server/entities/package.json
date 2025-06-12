@@ -1,0 +1,22 @@
+{
+  "name": "@my-auctions/server/entities",
+  "version": "0.0.1",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "nx": {
+    "name": "entities",
+    "tags": [
+      "scope:server"
+    ]
+  },
+  "dependencies": {}
+}

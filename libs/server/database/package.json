@@ -16,7 +16,60 @@
     "name": "database",
     "tags": [
       "scope:server"
-    ]
+    ],
+    "targets": {
+      "typeorm": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "ts-node --swc --project tsconfig.lib.json ../../../node_modules/typeorm/cli.js",
+          "cwd": "libs/server/database"
+        }
+      },
+      "migration:generate": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "nx run database:typeorm migration:generate ./src/lib/migrations/{args.name} -d ./src/lib/data-source",
+          "cwd": "libs/server/database"
+        }
+      },
+      "migration:create": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "nx run database:typeorm migration:create ./src/lib/migrations/{args.name}",
+          "cwd": "libs/server/database"
+        }
+      },
+      "migration:run": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "nx run database:typeorm migration:run -d ./src/lib/data-source",
+          "cwd": "libs/server/database"
+        }
+      },
+      "migration:revert": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "nx run database:typeorm migration:revert -d ./src/lib/data-source",
+          "cwd": "libs/server/database"
+        }
+      },
+      "migration:show": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "nx run database:typeorm migration:show -d ./src/lib/data-source",
+          "cwd": "libs/server/database"
+        }
+      },
+      "schema:drop": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "nx run database:typeorm schema:drop -d ./src/lib/data-source",
+          "cwd": "libs/server/database"
+        }
+      }
+    }
   },
-  "dependencies": {}
+  "dependencies": {
+    "@my-auctions/server/entities": "workspace:*"
+  }
 }

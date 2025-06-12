@@ -1,5 +1,17 @@
-# Add files here to ignore them from prettier formatting
 /dist
 /coverage
+.DS_Store
+node_modules
+bin/
+pnpm-lock.yaml
+
+# next.js
+.next
+out/
+
+# misc
+.DS_Store
+*.pem
+
 /.nx/cache
 /.nx/workspace-data
