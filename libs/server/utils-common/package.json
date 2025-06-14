@@ -1,5 +1,5 @@
 {
-  "name": "@my-auctions/server/entities",
+  "name": "@my-auctions/server/utils-common",
   "version": "0.0.1",
   "private": true,
   "main": "./src/index.ts",
@@ -17,7 +17,5 @@
       "scope:server"
     ]
   },
-  "dependencies": {
-    "@my-auctions/server/utils-common": "workspace:*"
-  }
+  "dependencies": {}
 }

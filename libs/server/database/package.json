@@ -66,6 +66,13 @@
           "command": "nx run database:typeorm schema:drop -d ./src/lib/data-source",
           "cwd": "libs/server/database"
         }
+      },
+      "seed": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "ts-node --swc --project tsconfig.lib.json ./src/lib/seed-db.ts",
+          "cwd": "libs/server/database"
+        }
       }
     }
   },

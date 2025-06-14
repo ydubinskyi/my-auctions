@@ -1,5 +1,7 @@
 import type { Relation } from 'typeorm';
-import { Column, Entity, OneToMany } from 'typeorm';
+import { Column, Entity, Index, OneToMany } from 'typeorm';
+
+import { hashString } from '@my-auctions/server/utils-common';
 
 import { Auction } from './auction.entity';
 import { BaseEntity } from './base.entity';
@@ -7,14 +9,27 @@ import { Bid } from './bid.entity';
 
 @Entity('users')
 export class User extends BaseEntity {
+  @Column()
+  firstName!: string;
+
+  @Column()
+  lastName!: string;
+
   @Column({ unique: true })
+  @Index('user_email_index')
   email!: string;
 
-  @Column()
+  @Column({
+    name: 'password',
+    length: 255,
+    transformer: {
+      to: (value: string) => {
+        return hashString(value);
+      },
+      from: (value: string) => value,
+    },
+  })
   password!: string;
-
-  @Column()
-  name!: string;
 
   @Column({
     type: 'enum',

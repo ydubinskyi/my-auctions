@@ -17,6 +17,9 @@
     },
     {
       "path": "./libs/server/entities"
+    },
+    {
+      "path": "./libs/server/utils-common"
     }
   ]
 }
