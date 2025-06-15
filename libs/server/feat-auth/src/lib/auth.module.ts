@@ -23,6 +23,6 @@ const jwtStrategies: Provider[] = [JwtAccessStrategy, JwtRefreshStrategy];
   ],
   controllers: [AuthController],
   providers: [AuthService, ...jwtStrategies],
-  exports: [AuthService, PassportModule],
+  exports: [AuthService, JwtModule, PassportModule, ...jwtStrategies],
 })
 export class AuthModule {}
