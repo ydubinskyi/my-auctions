@@ -9,12 +9,12 @@ import {
   OneToMany,
 } from 'typeorm';
 
-import { Attribute } from './attribute.entity';
-import { BaseEntity } from './base.entity';
-import { Lot } from './lot.entity';
+import { AttributeEntity } from './attribute.entity';
+import { AbstractOrmEntity } from './base.entity';
+import { LotEntity } from './lot.entity';
 
 @Entity('categories')
-export class Category extends BaseEntity {
+export class CategoryEntity extends AbstractOrmEntity {
   @Column()
   name!: string;
 
@@ -22,18 +22,18 @@ export class Category extends BaseEntity {
   @Index()
   slug!: string;
 
-  @ManyToOne(() => Category, (category) => category.children, {
+  @ManyToOne(() => CategoryEntity, (category) => category.children, {
     nullable: true,
   })
-  parent!: Relation<Category>;
+  parent!: Relation<CategoryEntity>;
 
-  @OneToMany(() => Category, (category) => category.parent)
-  children!: Relation<Category[]>;
+  @OneToMany(() => CategoryEntity, (category) => category.parent)
+  children!: Relation<CategoryEntity[]>;
 
-  @ManyToMany(() => Attribute, (attribute) => attribute.categories)
+  @ManyToMany(() => AttributeEntity, (attribute) => attribute.categories)
   @JoinTable()
-  attributes!: Relation<Attribute[]>;
+  attributes!: Relation<AttributeEntity[]>;
 
-  @OneToMany(() => Lot, (lot) => lot.category)
-  lots!: Relation<Lot[]>;
+  @OneToMany(() => LotEntity, (lot) => lot.category)
+  lots!: Relation<LotEntity[]>;
 }

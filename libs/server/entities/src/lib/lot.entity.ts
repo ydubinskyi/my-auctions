@@ -1,14 +1,14 @@
 import type { Relation } from 'typeorm';
 import { Column, Entity, Index, ManyToOne, OneToMany } from 'typeorm';
 
-import { Auction } from './auction.entity';
-import { BaseEntity } from './base.entity';
-import { Bid } from './bid.entity';
-import { Category } from './category.entity';
-import { LotAttributeValue } from './lot-attribute-value.entity';
+import { AuctionEntity } from './auction.entity';
+import { AbstractOrmEntity } from './base.entity';
+import { BidEntity } from './bid.entity';
+import { CategoryEntity } from './category.entity';
+import { LotAttributeValueEntity } from './lot-attribute-value.entity';
 
 @Entity('lots')
-export class Lot extends BaseEntity {
+export class LotEntity extends AbstractOrmEntity {
   @Column({ type: 'timestamp', nullable: true })
   publishedAt!: Date | null;
 
@@ -25,17 +25,19 @@ export class Lot extends BaseEntity {
   @Column({ type: 'decimal' })
   startPrice!: number;
 
-  @ManyToOne(() => Auction, (auction) => auction.lots)
+  @ManyToOne(() => AuctionEntity, (auction) => auction.lots)
   @Index('lot_auctionId_index')
-  auction!: Relation<Auction>;
+  auction!: Relation<AuctionEntity>;
 
-  @ManyToOne(() => Category, (category) => category.lots)
+  @ManyToOne(() => CategoryEntity, (category) => category.lots)
   @Index('lot_categoryId_index')
-  category!: Relation<Category>;
+  category!: Relation<CategoryEntity>;
 
-  @OneToMany(() => LotAttributeValue, (value) => value.lot, { cascade: true })
-  attributes!: Relation<LotAttributeValue[]>;
+  @OneToMany(() => LotAttributeValueEntity, (value) => value.lot, {
+    cascade: true,
+  })
+  attributes!: Relation<LotAttributeValueEntity[]>;
 
-  @OneToMany(() => Bid, (bid) => bid.lot, { cascade: true })
-  bids!: Relation<Bid[]>;
+  @OneToMany(() => BidEntity, (bid) => bid.lot, { cascade: true })
+  bids!: Relation<BidEntity[]>;
 }

@@ -1,19 +1,26 @@
 import type { Relation } from 'typeorm';
-import { Column, Entity, Index, OneToMany } from 'typeorm';
+import { Column, Entity, Index, OneToMany, VirtualColumn } from 'typeorm';
+import * as bcrypt from 'bcrypt';
 
-import { hashString } from '@my-auctions/server/utils-common';
+import { UserRole } from '@my-auctions/shared/types';
 
-import { Auction } from './auction.entity';
-import { BaseEntity } from './base.entity';
-import { Bid } from './bid.entity';
+import { AuctionEntity } from './auction.entity';
+import { AbstractOrmEntity } from './base.entity';
+import { BidEntity } from './bid.entity';
 
 @Entity('users')
-export class User extends BaseEntity {
-  @Column()
-  firstName!: string;
+export class UserEntity extends AbstractOrmEntity {
+  @Column({ nullable: true, type: String })
+  firstName!: string | null;
 
-  @Column()
-  lastName!: string;
+  @Column({ nullable: true, type: String })
+  lastName!: string | null;
+
+  @VirtualColumn({
+    query: (alias) =>
+      `SELECT CONCAT(${alias}."firstName", ' ', ${alias}."lastName")`,
+  })
+  fullName!: string;
 
   @Column({ unique: true })
   @Index('user_email_index')
@@ -24,23 +31,27 @@ export class User extends BaseEntity {
     length: 255,
     transformer: {
       to: (value: string) => {
-        return hashString(value);
+        const salt = bcrypt.genSaltSync();
+        return bcrypt.hashSync(value, salt);
       },
       from: (value: string) => value,
     },
   })
   password!: string;
 
+  @Column({ nullable: true, type: String })
+  refreshToken!: string | null;
+
   @Column({
     type: 'enum',
-    enum: ['buyer', 'seller', 'admin'],
-    default: 'buyer',
+    enum: UserRole,
+    default: UserRole.BUYER,
   })
-  role!: 'buyer' | 'seller' | 'admin';
+  role!: UserRole;
 
-  @OneToMany(() => Auction, (auction) => auction.seller)
-  auctions!: Relation<Auction[]>;
+  @OneToMany(() => AuctionEntity, (auction) => auction.seller)
+  auctions!: Relation<AuctionEntity[]>;
 
-  @OneToMany(() => Bid, (bid) => bid.user)
-  bids!: Relation<Bid[]>;
+  @OneToMany(() => BidEntity, (bid) => bid.user)
+  bids!: Relation<BidEntity[]>;
 }

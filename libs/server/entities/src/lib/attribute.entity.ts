@@ -1,14 +1,14 @@
 import type { Relation } from 'typeorm';
 import { Column, Entity, ManyToMany } from 'typeorm';
 
-import { BaseEntity } from './base.entity';
-import { Category } from './category.entity';
+import { AbstractOrmEntity } from './base.entity';
+import { CategoryEntity } from './category.entity';
 
 @Entity('attributes')
-export class Attribute extends BaseEntity {
+export class AttributeEntity extends AbstractOrmEntity {
   @Column()
   name!: string;
 
-  @ManyToMany(() => Category, (category) => category.attributes)
-  categories!: Relation<Category[]>;
+  @ManyToMany(() => CategoryEntity, (category) => category.attributes)
+  categories!: Relation<CategoryEntity[]>;
 }

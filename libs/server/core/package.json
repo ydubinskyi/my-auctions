@@ -13,10 +13,13 @@
     "./package.json": "./package.json"
   },
   "nx": {
-    "name": "@my-auctions/server/core",
     "tags": [
       "scope:server"
     ]
   },
-  "dependencies": {}
+  "dependencies": {
+    "@my-auctions/server/database": "workspace:*",
+    "@my-auctions/server/feat-auth": "workspace:*",
+    "@my-auctions/server/feat-user": "workspace:*"
+  }
 }

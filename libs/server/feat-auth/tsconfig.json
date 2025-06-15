@@ -1,0 +1,22 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "../../shared/types"
+    },
+    {
+      "path": "../entities"
+    },
+    {
+      "path": "../utils-common"
+    },
+    {
+      "path": "../feat-user"
+    },
+    {
+      "path": "./tsconfig.lib.json"
+    }
+  ]
+}

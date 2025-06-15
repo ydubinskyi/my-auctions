@@ -20,6 +20,15 @@
     },
     {
       "path": "./libs/server/utils-common"
+    },
+    {
+      "path": "./libs/server/feat-auth"
+    },
+    {
+      "path": "./libs/server/feat-user"
+    },
+    {
+      "path": "./libs/shared/types"
     }
   ]
 }

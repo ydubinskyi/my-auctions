@@ -17,5 +17,8 @@
       "scope:server"
     ]
   },
-  "dependencies": {}
+  "dependencies": {
+    "@my-auctions/shared/types": "workspace:*",
+    "@my-auctions/server/entities": "workspace:*"
+  }
 }

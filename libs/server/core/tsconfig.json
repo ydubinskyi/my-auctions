@@ -4,6 +4,15 @@
   "include": [],
   "references": [
     {
+      "path": "../feat-user"
+    },
+    {
+      "path": "../feat-auth"
+    },
+    {
+      "path": "../database"
+    },
+    {
       "path": "./tsconfig.lib.json"
     }
   ]

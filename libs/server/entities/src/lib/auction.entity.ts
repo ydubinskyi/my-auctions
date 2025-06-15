@@ -1,12 +1,12 @@
 import type { Relation } from 'typeorm';
 import { Column, Entity, Index, ManyToOne, OneToMany } from 'typeorm';
 
-import { BaseEntity } from './base.entity';
-import { Lot } from './lot.entity';
-import { User } from './user.entity';
+import { AbstractOrmEntity } from './base.entity';
+import { LotEntity } from './lot.entity';
+import { UserEntity } from './user.entity';
 
 @Entity('auctions')
-export class Auction extends BaseEntity {
+export class AuctionEntity extends AbstractOrmEntity {
   @Column({ type: 'timestamp', nullable: true })
   publishedAt!: Date | null;
 
@@ -20,11 +20,11 @@ export class Auction extends BaseEntity {
   @Column({ type: 'text', nullable: true })
   description!: string;
 
-  @ManyToOne(() => User, (user) => user.auctions)
-  seller!: Relation<User>;
+  @ManyToOne(() => UserEntity, (user) => user.auctions)
+  seller!: Relation<UserEntity>;
 
-  @OneToMany(() => Lot, (lot) => lot.auction, { cascade: true })
-  lots!: Relation<Lot[]>;
+  @OneToMany(() => LotEntity, (lot) => lot.auction, { cascade: true })
+  lots!: Relation<LotEntity[]>;
 
   @Column({ type: 'timestamp' })
   startTime!: Date;

@@ -1,7 +1,15 @@
 import { DataSourceOptions } from 'typeorm';
 import { join } from 'path';
 
-import * as entities from '@my-auctions/server/entities';
+import {
+  AttributeEntity,
+  AuctionEntity,
+  BidEntity,
+  CategoryEntity,
+  LotAttributeValueEntity,
+  LotEntity,
+  UserEntity,
+} from '@my-auctions/server/entities';
 
 export const typeOrmConfig: DataSourceOptions = {
   type: 'postgres',
@@ -10,7 +18,15 @@ export const typeOrmConfig: DataSourceOptions = {
   username: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
-  entities: Object.values(entities),
+  entities: [
+    AttributeEntity,
+    AuctionEntity,
+    BidEntity,
+    CategoryEntity,
+    LotAttributeValueEntity,
+    LotEntity,
+    UserEntity,
+  ],
   synchronize: false,
   migrations: [join(__dirname, '../migrations/*{.ts,.js}')],
 };

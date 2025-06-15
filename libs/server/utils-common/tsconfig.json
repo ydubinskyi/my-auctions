@@ -4,6 +4,12 @@
   "include": [],
   "references": [
     {
+      "path": "../entities"
+    },
+    {
+      "path": "../../shared/types"
+    },
+    {
       "path": "./tsconfig.lib.json"
     }
   ]

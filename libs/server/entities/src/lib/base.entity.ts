@@ -1,12 +1,17 @@
 import {
-  BaseEntity as TypeORMBaseEntity,
+  BaseEntity as BaseTypeormEntity,
   CreateDateColumn,
   DeleteDateColumn,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
-export abstract class BaseEntity extends TypeORMBaseEntity {
+import { IBaseEntity } from '@my-auctions/shared/types';
+
+export abstract class AbstractOrmEntity
+  extends BaseTypeormEntity
+  implements IBaseEntity
+{
   @PrimaryGeneratedColumn('uuid')
   id!: string;
 
@@ -17,5 +22,5 @@ export abstract class BaseEntity extends TypeORMBaseEntity {
   updatedAt!: Date;
 
   @DeleteDateColumn({ type: 'timestamp' })
-  deletedAt?: Date;
+  deletedAt!: Date | null;
 }
