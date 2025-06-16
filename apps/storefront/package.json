@@ -5,6 +5,31 @@
   "dependencies": {
     "next": "~15.2.4",
     "react": "19.0.0",
-    "react-dom": "19.0.0"
+    "react-dom": "19.0.0",
+    "@my-auctions/shared/types": "workspace:*"
+  },
+  "nx": {
+    "name": "storefront",
+    "targets": {
+      "serve": {
+        "executor": "@nx/next:server",
+        "defaultConfiguration": "development",
+        "options": {
+          "buildTarget": "storefront:build",
+          "dev": true,
+          "port": 4200
+        },
+        "configurations": {
+          "development": {
+            "buildTarget": "storefront:build:development",
+            "dev": true
+          },
+          "production": {
+            "buildTarget": "storefront:build:production",
+            "dev": false
+          }
+        }
+      }
+    }
   }
 }

@@ -1,3 +1,5 @@
+import { PAGINATION_DEFAULT_PAGE } from '@my-auctions/shared/types';
+
 export default function Index() {
   /*
    * Replace the elements below with your own.
@@ -12,6 +14,7 @@ export default function Index() {
             <h1>
               <span> Hello there, </span>
               Welcome @my-auctions/storefront 👋
+              {PAGINATION_DEFAULT_PAGE}
             </h1>
           </div>
 
