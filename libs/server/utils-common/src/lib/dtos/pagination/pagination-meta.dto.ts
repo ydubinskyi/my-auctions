@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 import {
   IsBoolean,
   IsInt,
@@ -18,6 +19,7 @@ export class PaginationMetaDto implements IPaginationMeta {
   @ApiProperty({
     default: PAGINATION_DEFAULT_PAGE,
   })
+  @Type(() => Number)
   @IsInt()
   @Min(1)
   readonly page!: number;
@@ -25,12 +27,14 @@ export class PaginationMetaDto implements IPaginationMeta {
   @ApiProperty({
     default: PAGINATION_DEFAULT_PER_PAGE,
   })
+  @Type(() => Number)
   @IsInt()
   @Min(1)
   @Max(50)
   readonly perPage!: number;
 
   @ApiProperty()
+  @Type(() => Number)
   @IsInt()
   @Min(0)
   readonly totalItems!: number;
@@ -38,6 +42,7 @@ export class PaginationMetaDto implements IPaginationMeta {
   @ApiProperty({
     default: 1,
   })
+  @Type(() => Number)
   @IsInt()
   @Min(1)
   readonly totalPages!: number;

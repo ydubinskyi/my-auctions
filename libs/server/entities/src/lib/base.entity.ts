@@ -5,6 +5,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Exclude } from 'class-transformer';
 
 import { IBaseEntity } from '@my-auctions/shared/types';
 
@@ -22,5 +23,6 @@ export abstract class AbstractOrmEntity
   updatedAt!: Date;
 
   @DeleteDateColumn({ type: 'timestamp' })
+  @Exclude({ toPlainOnly: true })
   deletedAt!: Date | null;
 }

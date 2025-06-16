@@ -1,6 +1,7 @@
 import type { Relation } from 'typeorm';
 import { Column, Entity, Index, OneToMany, VirtualColumn } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import { Exclude, instanceToPlain } from 'class-transformer';
 
 import { UserRole } from '@my-auctions/shared/types';
 
@@ -37,9 +38,11 @@ export class UserEntity extends AbstractOrmEntity {
       from: (value: string) => value,
     },
   })
+  @Exclude({ toPlainOnly: true })
   password!: string;
 
   @Column({ nullable: true, type: String })
+  @Exclude({ toPlainOnly: true })
   refreshToken!: string | null;
 
   @Column({
